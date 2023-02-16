@@ -12,25 +12,25 @@
 */
 Route::get('/demo', 'BusinessController@demosys')->name('demosys');
 // Clear application cache:
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     return 'Application cache has been cleared';
 });
 
 //Clear route cache:
-Route::get('/route-cache', function() {
-	Artisan::call('route:cache');
+Route::get('/route-cache', function () {
+    Artisan::call('route:cache');
     return 'Routes cache has been cleared';
 });
 
 //Clear config cache:
-Route::get('/config-cache', function() {
- 	Artisan::call('config:cache');
- 	return 'Config cache has been cleared';
+Route::get('/config-cache', function () {
+    Artisan::call('config:cache');
+    return 'Config cache has been cleared';
 });
 
 // Clear view cache:
-Route::get('/view-clear', function() {
+Route::get('/view-clear', function () {
     Artisan::call('view:clear');
     return 'View cache has been cleared';
 });
@@ -75,9 +75,9 @@ Route::middleware(['setData', 'auth', 'SetSessionData', 'language', 'timezone', 
     Route::post('/test-email', 'BusinessController@testEmailConfiguration');
     Route::post('/test-sms', 'BusinessController@testSmsConfiguration');
     Route::get('/business/settings', 'BusinessController@getBusinessSettings')->name('business.getBusinessSettings');
-	Route::get('/business/basicsettings', 'BusinessController@getbasicBusinessSettings')->name('business.basicsetting');
-	Route::get('/business/terms', 'BusinessController@terms')->name('business.terms');
-	Route::get('/business/howto', 'BusinessController@howto')->name('business.howto');
+    Route::get('/business/basicsettings', 'BusinessController@getbasicBusinessSettings')->name('business.basicsetting');
+    Route::get('/business/terms', 'BusinessController@terms')->name('business.terms');
+    Route::get('/business/howto', 'BusinessController@howto')->name('business.howto');
 
 
     Route::post('/business/update', 'BusinessController@postBusinessSettings')->name('business.postBusinessSettings');
@@ -297,6 +297,8 @@ Route::middleware(['setData', 'auth', 'SetSessionData', 'language', 'timezone', 
     Route::get('stock-transfers/print/{id}', 'StockTransferController@printInvoice');
     Route::post('stock-transfers/update-status/{id}', 'StockTransferController@updateStatus');
     Route::resource('stock-transfers', 'StockTransferController');
+    // New Invoiced Stock Transfer View
+    Route::resource('invoiced-stock-transfers', 'InvoicedStockTransferController');
 
     Route::get('/opening-stock/add/{product_id}', 'OpeningStockController@add');
     Route::post('/opening-stock/save', 'OpeningStockController@save');
@@ -404,7 +406,7 @@ Route::middleware(['setData', 'auth', 'SetSessionData', 'language', 'timezone', 
     Route::resource('warranties', 'WarrantyController');
 
     Route::resource('dashboard-configurator', 'DashboardConfiguratorController')
-    ->only(['edit', 'update']);
+        ->only(['edit', 'update']);
 
     Route::get('view-media/{model_id}', 'SellController@viewMedia');
 
